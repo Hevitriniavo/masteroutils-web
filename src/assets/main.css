@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary-blue: #104A99;
+  --color-light-blue: #8AA5CA;
+  --color-dark-blue-text: #044A96;
+  --color-pastel-blue: #D3E7FF;
+  --color-gas-module-bg: rgba(16, 74, 153, 0.5);
+  --color-electricity-module-bg: rgba(246, 161, 187, 0.5);
+  --color-header-menu-bg: #FDECDB;
+  --color-info-center-gradient-start: #5995CC;
+  --color-info-center-gradient-end: #A1C3E2;
+  --shadow-custom-card: 0 2px 0 var(--color-gray-300);
+  --shadow-custom-gap-base: 6px 3px 0 var(--color-gray-300);
+}
+
+@layer base {
+  .bg-custom-gradient {
+    background-image: linear-gradient(
+      to bottom right,
+      var(--color-primary-blue),
+      var(--color-light-blue)
+    );
+  }
+
+  .shadow-custom-card {
+    box-shadow: var(--shadow-custom-card);
+  }
+
+  .shadow-custom-gap-base {
+    box-shadow: var(--shadow-custom-gap-base);
+  }
+  .bg-info-center-gradient {
+    background-image: linear-gradient(
+      to bottom right,
+      var(--color-info-center-gradient-start),
+      var(--color-info-center-gradient-end)
+    );
+  }
+
+  .btn-primary {
+    color: white;
+    padding: 0.5rem 1rem;
+    font-weight: 600;
+    transition-property: background-color;
+    transition-duration: 300ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .btn-primary:hover {
+    background-color: var(--color-primary-blue);
+  }
+}
