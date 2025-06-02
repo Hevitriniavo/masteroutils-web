@@ -1,11 +1,13 @@
 <template>
    <div class="flex justify-between items-center ">
-     <div class="w-96 h-20 rounded-lg border-2 border-dashed ">
-        <img
-          :src="logo"
-          alt="Logo"
-        />
+     <div class="w-80 h-20 rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 flex items-center justify-center">
+       <img
+         :src="logo"
+         alt="Logo"
+         class="h-12 object-contain"
+       />
      </div>
+
      <div
        class="flex  gap-6 px-6 py-2   text-dark-blue-text shadow-custom-card rounded-lg"
       :class="[
