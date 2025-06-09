@@ -6,9 +6,7 @@
         {{ title }}
       </h1>
 
-      <h2 class="text-lg font-semibold uppercase text-dark-blue-text">
-        Modules
-      </h2>
+      <h2 class="text-lg font-semibold uppercase text-dark-blue-text">Modules</h2>
     </div>
 
     <div class="p-6 grid grid-cols-4 gap-6">
@@ -21,11 +19,7 @@
           class="absolute inset-0 flex items-center justify-center bg-white rounded-lg transition-transform duration-500 group-hover:rotate-y-180 [backface-visibility:hidden]"
         >
           <div class="flex flex-col items-center gap-2 px-4 text-center">
-            <img
-              :src="item.img"
-              alt="icon"
-              class="w-12 h-12 mb-2 object-contain"
-            />
+            <img :src="item.img" alt="icon" class="w-12 h-12 mb-2 object-contain" />
 
             <p class="text-md font-semibold text-gray-800">
               {{ item.text.before }}
@@ -37,22 +31,17 @@
           class="absolute inset-0 overflow-hidden bg-white rounded-lg transition-transform duration-500 rotate-y-180 group-hover:rotate-y-0 [backface-visibility:hidden] flex items-center justify-center"
         >
           <div class="relative w-full h-full">
-            <img
-              :src="topImg" alt="Top Image"
-              class="absolute max-h-64 top-0 left-0"
-            />
+            <img :src="topImg" alt="Top Image" class="absolute max-h-64 top-0 left-0" />
 
-            <ul class="text-sm text-gray-700 w-full h-full flex justify-center items-center flex-col gap-2 p-5 text-center z-10">
+            <ul
+              class="text-sm text-gray-700 w-full h-full flex justify-center items-center flex-col gap-2 p-5 text-center z-10"
+            >
               <li v-for="(line, index) in item.text.after" :key="index">
                 {{ line }}
               </li>
             </ul>
 
-            <img
-              :src="bottomImg"
-              alt="Bottom Image"
-              class="absolute max-h-52 bottom-0 right-0"
-            />
+            <img :src="bottomImg" alt="Bottom Image" class="absolute max-h-52 bottom-0 right-0" />
           </div>
         </div>
       </div>
@@ -66,6 +55,6 @@ defineProps({
   icon: Object,
   topImg: [String, Object],
   bottomImg: [String, Object],
-  modules: Array
+  modules: Array,
 })
 </script>

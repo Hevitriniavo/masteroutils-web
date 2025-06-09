@@ -1,8 +1,5 @@
 <template>
-  <div :class="[
-    'relative w-full',
-     containerClass
-  ]">
+  <div :class="['relative w-full', containerClass]">
     <span
       v-if="addIconLeft && $slots.iconLeft"
       class="absolute hover:cursor-pointer left-3 top-1/2 transform -translate-y-1/2"
@@ -12,7 +9,7 @@
 
     <span
       v-if="addIconRight && $slots.iconRight"
-      class="absolute right-3  hover:cursor-pointer top-1/2 transform -translate-y-1/2"
+      class="absolute right-3 hover:cursor-pointer top-1/2 transform -translate-y-1/2"
     >
       <slot name="iconRight" />
     </span>
@@ -27,7 +24,7 @@
         'block w-full py-3 text-sm',
         addIconLeft ? 'pl-9' : 'pl-3',
         addIconRight ? 'pr-9' : 'pr-3',
-        inputClass
+        inputClass,
       ]"
     />
 
@@ -44,7 +41,6 @@
     </label>
   </div>
 </template>
-
 
 <script setup>
 import { ref, watch, computed } from 'vue'
@@ -90,9 +86,12 @@ const isFocused = ref(false)
 
 const isFloating = computed(() => isFocused.value || localValue.value !== '')
 
-watch(() => props.value, (newVal) => {
-  localValue.value = newVal
-})
+watch(
+  () => props.value,
+  (newVal) => {
+    localValue.value = newVal
+  },
+)
 
 watch(localValue, (val) => {
   emit('updateValue', val)

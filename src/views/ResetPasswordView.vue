@@ -1,16 +1,7 @@
 <template>
-  <step-enter-email
-    v-if="step === 1"
-    :default-email="email"
-    @next="validEmail"
-  />
+  <step-enter-email v-if="step === 1" :default-email="email" @next="validEmail" />
 
-  <step-enter-otp
-    v-if="step === 2"
-    :default-code="code"
-    :email="email"
-    @next="validCode"
-  />
+  <step-enter-otp v-if="step === 2" :default-code="code" :email="email" @next="validCode" />
 
   <step-set-new-password
     v-if="step === 3"

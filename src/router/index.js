@@ -22,7 +22,7 @@ const router = createRouter({
           name: 'reset-password',
           component: ResetPasswordView,
         },
-      ]
+      ],
     },
     {
       path: '/admin',
@@ -33,9 +33,8 @@ const router = createRouter({
           name: 'admin',
           component: DashboardView,
         },
-      ]
+      ],
     },
-
   ],
 })
 
