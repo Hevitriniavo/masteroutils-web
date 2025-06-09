@@ -16,7 +16,7 @@
       <button
         @click="$emit('select', 'elect')"
         :class="[
-          'flex px-4 py-1 text-sm items-center justify-center gap-2 rounded rounded-lg',
+          'flex px-4 py-1 text-sm items-center justify-center gap-2 rounded-lg',
           selected === 'elect' ? 'bg-white' : '',
         ]"
       >
@@ -26,7 +26,7 @@
       <button
         @click="$emit('select', 'gaz')"
         :class="[
-          'flex px-4 py-1 text-sm items-center justify-center gap-2 rounded rounded-lg',
+          'flex px-4 py-1 text-sm items-center justify-center gap-2 rounded-lg',
           selected === 'gaz' ? 'bg-white' : '',
         ]"
       >
@@ -38,7 +38,7 @@
 
 <script setup>
 import { Droplet, Lightbulb } from 'lucide-vue-next'
-import logo from '@/assets/images/logo/Logo Synergy.png'
+import logo from '@/assets/images/logo/logo-synergy.png'
 defineProps({ selected: String })
 defineEmits(['select'])
 </script>

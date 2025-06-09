@@ -18,8 +18,7 @@
           label-text="E-mail"
           label-class="text-primary-blue"
           input-class="bg-gray-100 shadow-custom-gap-base font-light rounded-lg focus:outline-none"
-          :value="email"
-          @update-value="email = $event"
+          v-model="email"
         >
           <template #iconLeft>
             <Mail class="w-5 h-5 text-primary-blue" />

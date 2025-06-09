@@ -12,8 +12,7 @@
           </p>
 
           <the-input
-            :value="code"
-            @update-value="code = $event"
+            v-model="code"
             :add-icon-left="true"
             :add-label="true"
             container-class="mt-2"

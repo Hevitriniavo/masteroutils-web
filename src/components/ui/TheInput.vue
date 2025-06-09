@@ -43,10 +43,10 @@
 </template>
 
 <script setup>
-import { ref, watch, computed } from 'vue'
+import { ref, computed } from 'vue'
 
 const props = defineProps({
-  value: String,
+  modelValue: String,
   labelText: String,
   inputType: {
     type: String,
@@ -78,24 +78,21 @@ const props = defineProps({
   },
 })
 
-const emit = defineEmits(['updateValue'])
+const emit = defineEmits(['update:modelValue'])
 
 const inputId = 'input-' + Math.random().toString(36).substring(2, 9)
-const localValue = ref(props.value || '')
 const isFocused = ref(false)
 
-const isFloating = computed(() => isFocused.value || localValue.value !== '')
-
-watch(
-  () => props.value,
-  (newVal) => {
-    localValue.value = newVal
+const localValue = computed({
+  get() {
+    return props.modelValue || ''
   },
-)
-
-watch(localValue, (val) => {
-  emit('updateValue', val)
+  set(value) {
+    emit('update:modelValue', value)
+  },
 })
+
+const isFloating = computed(() => isFocused.value || localValue.value !== '')
 
 function onBlur() {
   isFocused.value = false
