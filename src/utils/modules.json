@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "name": "dashboard",
+    "title": "Tableau de bord",
+    "descriptions": ["Vue d'ensemble", "Consommations", "Dépenses", "Optimisations"]
+  },
+  {
+    "id": 2,
+    "name": "suivi",
+    "title": "Module de suivi",
+    "descriptions": [
+      "Etat des lieux",
+      "Etude du contrat en cours",
+      "Consommations",
+      "Consommations/Conditions météo",
+      "Bilan des émissions"
+    ]
+  },
+  {
+    "id": 3,
+    "name": "flux",
+    "title": "Module de gestion des flux de paiements",
+    "descriptions": ["Dépenses", "Facturation", "Optimisation fiscale"]
+  },
+  {
+    "id": 4,
+    "name": "technique",
+    "title": "Module technique",
+    "descriptions": [
+      "Suivi des puissances",
+      "Optimisation de l'achemînement",
+      "Optimisation fiscale",
+      "Calcul des besoins énergétiques"
+    ]
+  },
+  {
+    "id": 5,
+    "name": "achat",
+    "title": "Module achats",
+    "descriptions": [
+      "Budget",
+      "Stratégie achat - Etude des formules de prix",
+      "Stratégie achat - Analyse du marché"
+    ]
+  },
+  {
+    "id": 6,
+    "name": "offre",
+    "title": "Module appel d'offre",
+    "descriptions": [
+      "Etat des lieux",
+      "Consommations/Facturations",
+      "Analyses des offres",
+      "Synthèse et recommandations"
+    ]
+  },
+  {
+    "id": 7,
+    "name": "environnement",
+    "title": "Module environnement",
+    "descriptions": ["Dépenses", "Facturation", "Optimisation fiscale"]
+  },
+  {
+    "id": 8,
+    "name": "rapport",
+    "title": "Rapport Synergygroup et veille juridique",
+    "descriptions": [
+      "Synthèse des résultats, optimisations et économies",
+      "Points sur les recommandations et actions à lancer",
+      "Veille juridique"
+    ]
+  }
+]

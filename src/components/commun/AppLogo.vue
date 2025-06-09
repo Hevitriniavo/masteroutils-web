@@ -1,7 +1,7 @@
 <template>
   <img
-    :width
-    :height
+    :width="`${width}px`"
+    :height="`${height}px`"
     src="@/assets/images/logo/logo-synergy-animated.gif"
     alt="Logo"
     class="object-contain"

@@ -1,9 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import LoginView from '@/views/LoginView.vue'
-import ResetPasswordView from '@/views/ResetPasswordView.vue'
 import AuthLayout from '@/components/layouts/AuthLayout.vue'
-import DashboardView from '@/views/DashboardView.vue'
-import AdminLayout from '@/components/layouts/AdminLayout.vue'
+import AccountLayout from '@/components/layouts/AccountLayout.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -15,23 +12,28 @@ const router = createRouter({
         {
           path: '',
           name: 'login',
-          component: LoginView,
+          component: () => import('@/views/ModuleElecView.vue'),
         },
         {
           path: 'reset-password',
           name: 'reset-password',
-          component: ResetPasswordView,
+          component: () => import('@/views/ResetPasswordView.vue'),
         },
       ],
     },
     {
-      path: '/admin',
-      component: AdminLayout,
+      path: '/modules',
+      component: AccountLayout,
       children: [
         {
-          path: '',
-          name: 'admin',
-          component: DashboardView,
+          path: 'elec',
+          name: 'modules_elec',
+          component: () => import('@/views/ModuleElecView.vue'),
+        },
+        {
+          path: 'gaz',
+          name: 'modules_gaz',
+          component: () => import('@/views/ModuleGazView.vue'),
         },
       ],
     },

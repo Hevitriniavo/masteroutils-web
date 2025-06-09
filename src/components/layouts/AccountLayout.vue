@@ -1,14 +1,10 @@
 <template>
   <div>
     <nav
-      class="fixed bg-white top-0 left-0 right-0 shadow z-50 flex justify-between items-center px-10 py-6"
+      class="fixed bg-white top-0 z-50 left-0 right-0 shadow flex justify-between items-center px-22"
     >
-      <div class="flex items-center space-x-2">
-        <img :src="logo" alt="Synergy Group Logo" class="h-6 w-auto" />
-        <div class="flex flex-row uppercase text-lg font-semibold">
-          <span class="text-dark-blue-text">synergy</span>
-          <span class="text-[#f6a11b]">group</span>
-        </div>
+      <div class="relative overflow-hidden flex items-center justify-center h-[80px] w-[300px]">
+        <AppLogo class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[45%]" />
       </div>
 
       <div class="flex justify-center space-x-4">
@@ -39,6 +35,6 @@
 
 <script setup>
 import TheButton from '@/components/ui/TheButton.vue'
+import AppLogo from '@/components/commun/AppLogo.vue'
 import { LogOut } from 'lucide-vue-next'
-import logo from '@/assets/images/icones/logo_seul_synergygroup_color.png'
 </script>

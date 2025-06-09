@@ -1,6 +1,7 @@
 <template>
   <button
-    :class="['btn-primary', { 'opacity-50 cursor-not-allowed': disabled }, btnClass]"
+    class="btn-primary"
+    :class="[disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer', btnClass]"
     :disabled="disabled"
     :type="type"
     @click="$emit('btnClick')"
