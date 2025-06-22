@@ -4,29 +4,26 @@
     :visibleCloseIcon="false"
     @close="$emit('close')"
     modalClass="
-        !p-6
-        bg-[url('@/assets/images/master-outils-modal-bg.png')] 
+        p-6
+        bg-[url('@/assets/images/welcome-bg.png')] 
         rounded-lg
         shadow-xl
         bg-white
         text-center
-        p-4
+        bg-no-repeat
+        bg-cover
         "
     outsideModalClass="bg-black/50"
   >
-    <div class="w-[500px] max-w-full p-2 bg-white rounded-lg">
-      <h1 class="text-lg font-semibold text-dark-blue-text mb-2">
+    <div class="w-[700px] max-w-full h-[250px] p-2 bg-white opacity-90 rounded-lg">
+      <h1 class="text-[25px] font-semibold text-dark-blue-text mb-2">
         Bienvenue sur votre espace client MasterOutils !
       </h1>
 
       <hr class="mb-4 mx-30 text-dark-blue-text" />
 
-      <div class="px-4 py-4">
-        <img
-          src="@/assets/images/logo/logo-synergy.png"
-          alt="Logo Synergy Group"
-          class="mx-auto max-w-[250px]"
-        />
+      <div class="px-4 pt-4">
+        <AppLogo class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[45%]" />
       </div>
     </div>
   </TheModal>
@@ -34,6 +31,7 @@
 
 <script setup>
 import TheModal from '@/components/ui/TheModal.vue'
+import AppLogo from './commun/AppLogo.vue'
 
 defineProps({
   isOpen: {
