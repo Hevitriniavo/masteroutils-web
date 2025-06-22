@@ -1,5 +1,7 @@
 <template>
-  <TheModules group="elec" />
+  <div class="py-24 px-4">
+    <TheModules group="elec" />
+  </div>
 </template>
 
 <script setup>

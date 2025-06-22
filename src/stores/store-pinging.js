@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { axiosWrapper } from './axios'
-import { PING, PING_ACTIVITY, PING_VISITE_MODULE } from 'src/store/endpoints'
+import { PING, PING_ACTIVITY, PING_VISITE_MODULE } from '@/stores/endpoints'
 import { useUserAuthStore } from './store-user-auth'
 
 export const usePingingStore = defineStore('pinging', () => {

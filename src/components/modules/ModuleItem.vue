@@ -1,7 +1,8 @@
 <template>
   <div
-    @click="$emit('moduleItemShow')"
-    class="group w-[290px] h-[220px] relative [transform-style:preserve-3d] [perspective:1000px] cursor-pointer"
+    @click="onClickModuleItem"
+    class="group w-[290px] h-[220px] relative [transform-style:preserve-3d] [perspective:1000px]"
+    :class="[itemEnabled ? 'cursor-pointer' : 'cursor-not-allowed']"
   >
     <div
       class="absolute inset-0 flex items-center justify-center bg-white rounded-lg transition-transform duration-500 group-hover:rotate-y-180 [backface-visibility:hidden]"
@@ -49,8 +50,9 @@ import gazUpLeft from '@/assets/images/icones/gaz-up-left.png'
 import gazBottomRight from '@/assets/images/icones/gaz-bottom-right.png'
 import elecUpLeft from '@/assets/images/icones/elec-up-left.png'
 import elecBottomRight from '@/assets/images/icones/elec-bottom-right.png'
+import { computed } from 'vue'
 
-defineProps({
+const props = defineProps({
   group: {
     type: String,
     default: 'elec', // elect, gaz
@@ -66,7 +68,23 @@ defineProps({
     type: Object,
     reauired: true,
   },
+  spaceEnabled: {
+    type: Boolean,
+    default: true,
+  },
 })
 
-defineEmits(['moduleItemShow'])
+const emit = defineEmits(['moduleItemShow'])
+
+const itemEnabled = computed(() => {
+  const apiModule = props.moduleValue._api_module || {}
+
+  return !!apiModule.lien && props.spaceEnabled
+})
+
+const onClickModuleItem = () => {
+  if (itemEnabled.value) {
+    emit('moduleItemShow')
+  }
+}
 </script>

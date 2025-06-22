@@ -19,8 +19,6 @@ export const useUserAuthStore = defineStore('userAuth', () => {
     storage.setStorage(constant.STORAGE_KEY_USER, userVal)
     storage.setStorage(constant.STORAGE_KEY_PERMISSION, permissionVal)
 
-    console.log('User data updated:', userVal, tokenVal, permissionVal)
-
     user.value = userVal
     token.value = tokenVal
     permission.value = permissionVal

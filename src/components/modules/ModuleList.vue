@@ -35,6 +35,10 @@ defineProps({
     default: 'elec', // elec, gaz
   },
   modules: Array,
+  spaceEnabled: {
+    type: Boolean,
+    default: true,
+  },
 })
 defineEmits(['moduleShow'])
 </script>
