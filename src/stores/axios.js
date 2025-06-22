@@ -9,7 +9,7 @@ const FORM_DATA = 'multipart/form-data'
 const FORM_URLENCODED = 'application/x-www-form-urlencoded'
 const injectAuthToken = (options, authNeeded = true) => {
   if (authNeeded) {
-    const headers = options.headers ? options.headers : []
+    const headers = options.headers ? options.headers : {}
     headers['Authorization'] = `Bearer ${storage.getStorage(constant.STORAGE_KEY_TOKEN)}`
     options.headers = headers
   }

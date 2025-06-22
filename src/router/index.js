@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import AuthLayout from '@/components/layouts/AuthLayout.vue'
 import AccountLayout from '@/components/layouts/AccountLayout.vue'
+import { useUserAuthStore } from '@/stores/store-user-auth'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -43,6 +44,27 @@ const router = createRouter({
       component: () => import('@/views/ReportingView.vue'),
     },
   ],
+})
+
+router.beforeEach(async (to, from) => {
+  const allowedRoutes = ['login', 'reset-password']
+  if ( allowedRoutes.includes(to.name) === false ) {
+    const storeAuth = useUserAuthStore()
+
+    if (storeAuth.user !== null && storeAuth.permission !== null) {
+      return true
+    }
+
+    try {
+
+      await storeAuth.checkToken()
+
+      return true
+    } catch (error) {
+      storeAuth.logout()
+    }
+    return { name: 'login' }
+  }
 })
 
 export default router

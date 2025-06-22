@@ -19,6 +19,8 @@ export const useUserAuthStore = defineStore('userAuth', () => {
     storage.setStorage(constant.STORAGE_KEY_USER, userVal)
     storage.setStorage(constant.STORAGE_KEY_PERMISSION, permissionVal)
 
+    console.log('User data updated:', userVal, tokenVal, permissionVal)
+
     user.value = userVal
     token.value = tokenVal
     permission.value = permissionVal
@@ -42,7 +44,9 @@ export const useUserAuthStore = defineStore('userAuth', () => {
     try {
       const response = await axiosWrapper.get(api.CHECK_TOKEN)
       if (response.data) {
-        return utility__updateUser(response.data)
+        const token = storage.getStorage(constant.STORAGE_KEY_TOKEN)
+        const permission = storage.getStorage(constant.STORAGE_KEY_PERMISSION)
+        return utility__updateUser({ user: response.data, token, permissions: [permission] })
       }
     } catch (error) {
       throw new Error(error)

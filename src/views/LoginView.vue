@@ -21,7 +21,7 @@
             input-class="bg-gray-100 text-primary-blue shadow-custom-gap-base font-medium rounded-lg focus:outline-none text-center"
             v-bind="emailProps"
             :input-error-message="errors.email"
-            :input-error="errors.email"
+            :input-error="!!errors.email"
           >
             <template #iconLeft>
               <IconMail />
@@ -39,7 +39,7 @@
             input-placeholder="Mot de passe"
             input-class="bg-gray-100 text-primary-blue shadow-custom-gap-base font-medium rounded-lg focus:outline-none text-center"
             :input-error-message="errors.password"
-            :input-error="errors.password"
+            :input-error="!!errors.password"
           >
             <template #iconLeft>
               <IconLock />
