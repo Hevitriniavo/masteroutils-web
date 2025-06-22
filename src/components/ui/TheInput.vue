@@ -1,49 +1,40 @@
 <template>
   <div :class="['relative w-full', containerClass]">
-    <span
-      v-if="addIconLeft && $slots.iconLeft"
-      class="absolute hover:cursor-pointer left-3 top-1/2 transform -translate-y-1/2"
-    >
-      <slot name="iconLeft" />
-    </span>
+    <div class="relative">
+      <span
+        v-if="addIconLeft && $slots.iconLeft"
+        class="absolute left-3 top-1/2 transform -translate-y-1/2"
+        :class="{ 'hover:cursor-pointer' : addIconLeftHover }"
+      >
+        <slot name="iconLeft" />
+      </span>
 
-    <span
-      v-if="addIconRight && $slots.iconRight"
-      class="absolute right-3 hover:cursor-pointer top-1/2 transform -translate-y-1/2"
-    >
-      <slot name="iconRight" />
-    </span>
+      <span
+        v-if="addIconRight && $slots.iconRight"
+        class="absolute right-3 top-1/2 transform -translate-y-1/2"
+        :class="{ 'hover:cursor-pointer' : addIconRightHover }"
+      >
+        <slot name="iconRight" />
+      </span>
 
-    <input
-      :id="inputId"
-      :type="inputType"
-      v-model="localValue"
-      @focus="isFocused = true"
-      @blur="onBlur"
-      :class="[
-        'block w-full py-3 text-sm',
-        addIconLeft ? 'pl-9' : 'pl-3',
-        addIconRight ? 'pr-9' : 'pr-3',
-        inputClass,
-      ]"
-    />
-
-    <label
-      v-if="addLabel"
-      :for="inputId"
-      :class="[
-        'absolute left-10 transition-all duration-200 ease-in-out pointer-events-none',
-        labelClass,
-        isFloating ? '-top-6' : 'top-2.5',
-      ]"
-    >
-      {{ labelText }}
-    </label>
+      <input
+        :type="inputType"
+        v-model="localValue"
+        :class="[
+          'block w-full py-3 text-sm placeholder-primary-blue placeholder:text-md placeholder:font-light',
+          addIconLeft ? 'pl-9' : 'pl-3',
+          addIconRight ? 'pr-9' : 'pr-3',
+          inputClass,
+        ]"
+        :placeholder="inputPlaceholder"
+      />
+    </div>
+    <p v-if="inputError" class="mt-1 text-sm text-red-500">{{ inputErrorMessage }}</p>
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { computed } from 'vue'
 
 const props = defineProps({
   modelValue: String,
@@ -51,10 +42,6 @@ const props = defineProps({
   inputType: {
     type: String,
     default: 'text',
-  },
-  addLabel: {
-    type: Boolean,
-    default: true,
   },
   containerClass: {
     type: [String, Object, Array],
@@ -64,24 +51,37 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  addIconLeftHover: {
+    type: Boolean,
+    default: false,
+  },
   addIconRight: {
     type: Boolean,
     default: false,
   },
-  labelClass: {
+  addIconRightHover: {
+    type: Boolean,
+    default: false,
+  },
+  inputClass: {
     type: String,
     default: '',
   },
-  inputClass: {
+  inputPlaceholder: {
+    type: String,
+    default: '',
+  },
+  inputError: {
+    type: Boolean,
+    default: false,
+  },
+  inputErrorMessage: {
     type: String,
     default: '',
   },
 })
 
 const emit = defineEmits(['update:modelValue'])
-
-const inputId = 'input-' + Math.random().toString(36).substring(2, 9)
-const isFocused = ref(false)
 
 const localValue = computed({
   get() {
@@ -91,10 +91,4 @@ const localValue = computed({
     emit('update:modelValue', value)
   },
 })
-
-const isFloating = computed(() => isFocused.value || localValue.value !== '')
-
-function onBlur() {
-  isFocused.value = false
-}
 </script>
