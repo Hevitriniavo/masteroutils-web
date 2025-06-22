@@ -4,7 +4,13 @@
     <div class="flex items-center justify-center h-screen">
       <TheCard card-class="py-12 w-[560px] bg-white rounded-4xl">
         <div class="flex flex-col gap-2 w-[375px] mx-auto">
-          <h1 class="text-primary-blue text-3xl font-bold text-center pb-2">ESPACE CLIENT</h1>
+          <h1 class="text-primary-blue font-semibold text-[40px] text-center pb-2">
+            ESPACE CLIENT
+          </h1>
+
+          <p class="text-red-600 text-center text-sm" v-if="formLoginError">
+            {{ formLoginError }}
+          </p>
 
           <TheInput
             v-model="email"
@@ -13,7 +19,9 @@
             input-type="email"
             input-placeholder="E-mail ou identifiant"
             input-class="bg-gray-100 text-primary-blue shadow-custom-gap-base font-medium rounded-lg focus:outline-none text-center"
-            input-error="Veuillez entrer un e-mail valide"
+            v-bind="emailProps"
+            :input-error-message="errors.email"
+            :input-error="errors.email"
           >
             <template #iconLeft>
               <IconMail />
@@ -26,9 +34,12 @@
             :add-icon-right="true"
             :add-icon-right-hover="true"
             :input-type="showPassword ? 'text' : 'password'"
+            v-bind="passwordProps"
             container-class="mt-2"
             input-placeholder="Mot de passe"
             input-class="bg-gray-100 text-primary-blue shadow-custom-gap-base font-medium rounded-lg focus:outline-none text-center"
+            :input-error-message="errors.password"
+            :input-error="errors.password"
           >
             <template #iconLeft>
               <IconLock />
@@ -37,7 +48,7 @@
               <IconEye
                 :icon-type="showPassword ? 'on' : 'off'"
                 @click="showPassword = !showPassword"
-                />
+              />
             </template>
           </TheInput>
 
@@ -54,6 +65,7 @@
           <TheButton
             btn-class="w-full uppercase bg-dark-blue-text rounded-lg uppercase mt-4 font-semibold"
             @click="handleSubmit"
+            :disabled="!meta.valid || !meta.dirty || meta.pending || requestInProgress"
           >
             Se connecter
           </TheButton>
@@ -73,14 +85,57 @@ import IconEye from '@/components/icons/IconEye.vue'
 import IconLock from '@/components/icons/IconLock.vue'
 import IconMail from '@/components/icons/IconMail.vue'
 
-const email = ref('')
-const password = ref('')
-const showPassword = ref(false)
+import { useForm } from 'vee-validate'
+import { toTypedSchema } from '@vee-validate/yup'
+import * as yup from 'yup'
 
-const handleSubmit = () => {
-  console.log('Data submitted:', {
-    email: email.value,
-    password: password.value,
-  })
-}
+import { useUserAuthStore } from '@/stores/store-user-auth'
+import { useModule } from '@/composables/use-module'
+import { useRouter } from 'vue-router'
+
+const storeAuth = useUserAuthStore()
+const { openUserReporting } = useModule()
+const router = useRouter()
+
+const {
+  meta,
+  errors,
+  handleSubmit: handleFormSubmit,
+  defineField,
+} = useForm({
+  validationSchema: toTypedSchema(
+    yup.object({
+      email: yup.string().required(`L'email ou l'identifiant est requis`),
+      password: yup.string().required('Le mot de passe est requis'),
+    }),
+  ),
+})
+const [email, emailProps] = defineField('email')
+const [password, passwordProps] = defineField('password')
+
+const showPassword = ref(false)
+const formLoginError = ref(null)
+const requestInProgress = ref(false)
+
+const handleSubmit = handleFormSubmit(async (values) => {
+  formLoginError.value = null
+  requestInProgress.value = true
+  try {
+    await storeAuth.login({
+      username: values.email,
+      password: values.password,
+    })
+
+    requestInProgress.value = false
+
+    if (storeAuth.permission === 'ROLE_MODULE') {
+      router.push({ name: 'modules_elec' })
+    } else {
+      openUserReporting()
+    }
+  } catch (error) {
+    formLoginError.value = error.message || 'Une erreur est survenue lors de la connexion.'
+    requestInProgress.value = false
+  }
+})
 </script>

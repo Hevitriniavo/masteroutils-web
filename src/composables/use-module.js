@@ -1,10 +1,12 @@
 import { storage } from '@/stores/storage'
 import { useUserAuthStore } from '@/stores/store-user-auth'
+import { useRouter } from 'vue-router'
 
 export const useModule = () => {
   const storeAuth = useUserAuthStore()
+  const router = useRouter()
 
-  const openUserReporting = (reporting, sousGroup, permission) => {
+  const openReporting = (reporting, sousGroup, permission) => {
     if (reporting && !reporting.url) {
       if (!/^https?:\/\//.test(reporting.url) && reporting.is_enabled) {
         const params = { id: reporting.id, type: 'reporting' }
@@ -15,17 +17,24 @@ export const useModule = () => {
         ) {
           query.group = sousGroup.id
         }
-        this.$router.push({ name: 'embed-frame', params: params, query: query })
+        router.push({ name: 'embed-frame', params: params, query: query })
       } else {
         if (reporting.is_enabled) {
           storage.setStorage('current-module', { lien: reporting.url })
         }
-        this.$router.push({ name: 'frame', params: { name: `${reporting.id}-reporting` } })
+        router.push({ name: 'frame', params: { name: `${reporting.id}-reporting` } })
       }
     }
   }
 
+  const openUserReporting = () => {
+    const user = storeAuth.user
+    const permission = storeAuth.permission
+    openReporting(user.reporting, user.reporting_sous_group, permission)
+  }
+
   return {
+    openReporting,
     openUserReporting,
   }
 }

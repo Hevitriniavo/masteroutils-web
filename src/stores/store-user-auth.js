@@ -6,7 +6,6 @@ import { storage } from './storage'
 import * as constant from './stores-constant'
 
 export const useUserAuthStore = defineStore('userAuth', () => {
-  const requesting = ref(false)
   const user = ref(null)
   const token = ref(null)
   const permission = ref(null)
@@ -28,31 +27,25 @@ export const useUserAuthStore = defineStore('userAuth', () => {
   }
 
   const login = async (payload) => {
-    requesting.value = true
     try {
-      const response = axiosWrapper.post(`${api.USER}/login`, payload)
+      const response = await axiosWrapper.post(`${api.USER}/login`, payload)
       if (response.data) {
         return utility__updateUser(response.data)
       }
     } catch (error) {
       throw new Error(error)
-    } finally {
-      requesting.value = false
     }
-    throw new Error('Aucun utilisateur trouve.')
+    throw new Error('Votre email ou mot de passe est incorrect.')
   }
 
   const checkToken = async () => {
-    requesting.value = true
     try {
-      const response = axiosWrapper.get(api.CHECK_TOKEN)
+      const response = await axiosWrapper.get(api.CHECK_TOKEN)
       if (response.data) {
         return utility__updateUser(response.data)
       }
     } catch (error) {
       throw new Error(error)
-    } finally {
-      requesting.value = false
     }
     throw new Error('Aucun utilisateur trouve.')
   }
@@ -66,7 +59,6 @@ export const useUserAuthStore = defineStore('userAuth', () => {
   }
 
   return {
-    requesting,
     user,
     token,
     permission,

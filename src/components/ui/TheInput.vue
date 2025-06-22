@@ -4,7 +4,7 @@
       <span
         v-if="addIconLeft && $slots.iconLeft"
         class="absolute left-3 top-1/2 transform -translate-y-1/2"
-        :class="{ 'hover:cursor-pointer' : addIconLeftHover }"
+        :class="{ 'hover:cursor-pointer': addIconLeftHover }"
       >
         <slot name="iconLeft" />
       </span>
@@ -12,7 +12,7 @@
       <span
         v-if="addIconRight && $slots.iconRight"
         class="absolute right-3 top-1/2 transform -translate-y-1/2"
-        :class="{ 'hover:cursor-pointer' : addIconRightHover }"
+        :class="{ 'hover:cursor-pointer': addIconRightHover }"
       >
         <slot name="iconRight" />
       </span>
@@ -27,6 +27,8 @@
           inputClass,
         ]"
         :placeholder="inputPlaceholder"
+        @blur="$emit('blur', $event)"
+        @focus="$emit('focus', $event)"
       />
     </div>
     <p v-if="inputError" class="mt-1 text-sm text-red-500">{{ inputErrorMessage }}</p>
@@ -81,7 +83,7 @@ const props = defineProps({
   },
 })
 
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue', 'blur', 'focus'])
 
 const localValue = computed({
   get() {

@@ -1,5 +1,5 @@
 <template>
-    <Mail class="w-5 h-5 text-primary-blue" />
+  <Mail class="w-5 h-5 text-primary-blue" />
 </template>
 
 <script setup>
