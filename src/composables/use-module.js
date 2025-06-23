@@ -7,7 +7,7 @@ export const useModule = () => {
   const router = useRouter()
 
   const openReporting = (reporting, sousGroup, permission) => {
-    if (reporting && !reporting.url) {
+    if (reporting && reporting.url) {
       if (!/^https?:\/\//.test(reporting.url) && reporting.is_enabled) {
         const params = { id: reporting.id, type: 'reporting' }
         const query = {}

@@ -53,7 +53,6 @@ const onChangeOnglet = (value) => {
 
 const onGoToModule = (moduleItem) => {
   const apiModule = moduleItem._api_module || {}
-  console.log('onGoToModule', apiModule)
   if (apiModule.lien) {
     if (/^https?:\/\//.test(apiModule.lien)) {
       storage.setStorage('current-module', apiModule)

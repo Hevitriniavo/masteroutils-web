@@ -40,7 +40,6 @@ import { computed } from 'vue'
 
 const props = defineProps({
   modelValue: String,
-  labelText: String,
   inputType: {
     type: String,
     default: 'text',

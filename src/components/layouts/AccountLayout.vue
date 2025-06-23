@@ -51,10 +51,12 @@ import IconLogout from '../icons/IconLogout.vue'
 import { useUserAuthStore } from '@/stores/store-user-auth'
 import { useRouter, useRoute } from 'vue-router'
 import { storage } from '@/stores/storage'
+import { useModule } from '@/composables/use-module'
 
 const authStore = useUserAuthStore()
 const router = useRouter()
 const route = useRoute()
+const { openUserReporting } = useModule()
 
 const onLogout = () => {
   authStore.logout()
@@ -63,8 +65,13 @@ const onLogout = () => {
 }
 
 const onGoToMyAccount = () => {
-  if (route.name !== 'modules_elec' && route.name !== 'modules_gaz') {
-    router.push({ name: 'modules_elec' })
+  const permission = authStore.permission
+  if (permission === 'ROLE_MODULE') {
+    if (route.name !== 'modules_elec' && route.name !== 'modules_gaz') {
+      router.push({ name: 'modules_elec' })
+    }
+  } else {
+    openUserReporting()
   }
 }
 
