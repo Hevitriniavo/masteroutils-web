@@ -21,17 +21,30 @@
         <hr class="opacity-30" />
 
         <div class="flex flex-col gap-3 mt-3">
-          <TheButton btn-class="border-1 border-white rounded-full" @btn-click="onHelpTelephone">
+          <TheButton
+            btn-class="border-1 border-white rounded-full"
+            @btn-click="storeHelpCenter.sendDemandeHelp('telephone')"
+            :disabled="storeHelpCenter.helpRequested || storeHelpCenter.helpToastVisible"
+          >
             Téléphone
           </TheButton>
-          <TheButton btn-class="border-1 border-white rounded-full" @btn-click="onHelpEmail">
+          <TheButton
+            btn-class="border-1 border-white rounded-full"
+            @btn-click="storeHelpCenter.sendDemandeHelp('email')"
+            :disabled="storeHelpCenter.helpRequested || storeHelpCenter.helpToastVisible"
+          >
             Email
           </TheButton>
         </div>
       </div>
     </transition>
 
-    <TheToast :show="showToast" :message="message" :duration="60000" @close="showToast = false" />
+    <TheToast
+      :show="storeHelpCenter.helpToastVisible"
+      :message="storeHelpCenter.helpToastMessage"
+      :duration="60000"
+      @close="onCloseHelpToast"
+    />
   </div>
 </template>
 
@@ -41,21 +54,14 @@ import IconHelp from './icons/IconHelp.vue'
 import TheButton from './ui/TheButton.vue'
 import IconClose from './icons/IconClose.vue'
 import TheToast from './ui/TheToast.vue'
+import { useHelpCenterStore } from '@/stores/store-help-center'
 
 const helpOpened = ref(false)
-const showToast = ref(false)
-const message = ref('')
 
-const onHelpTelephone = () => {
-  showToast.value = true
-  message.value =
-    "Votre demande a été prise en compte. L'admin va vous contacter depuis votre téléphone d'ici peu. Merci."
-}
+const storeHelpCenter = useHelpCenterStore()
 
-const onHelpEmail = () => {
-  showToast.value = true
-  message.value =
-    "Votre demande a été prise en compte. L'admin va vous contacter depuis votre mail d'ici peu. Merci."
+const onCloseHelpToast = () => {
+  storeHelpCenter.$patch({ helpToastVisible: false, helpToastMessage: '' })
 }
 </script>
 
