@@ -1,5 +1,5 @@
 <template>
-  <div class="py-24 px-4">
+  <div class="pt-24 pb-22 px-4">
     <TheModules group="gaz" />
   </div>
 </template>

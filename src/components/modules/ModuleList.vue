@@ -10,7 +10,7 @@
       <h2 class="text-lg font-semibold uppercase text-dark-blue-text">Modules</h2>
     </div>
 
-    <div class="p-6 grid grid-cols-4 gap-6">
+    <div class="p-6 grid grid-cols-4 place-items-center gap-y-20">
       <ModuleItem
         v-for="(item, i) in modules"
         :key="item.id"

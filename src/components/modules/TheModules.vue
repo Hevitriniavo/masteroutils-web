@@ -7,7 +7,7 @@
       <ModuleToggleTabs :group @group-change="onChangeOnglet" />
     </div>
     <div
-      class="mt-6 rounded-lg h-[660px]"
+      class="mt-6 rounded-lg pb-8"
       :class="[{ 'bg-pastel-blue': group === 'gaz' }, { 'bg-header-menu-bg': group === 'elec' }]"
     >
       <ModuleList
