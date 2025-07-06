@@ -1,7 +1,8 @@
 <template>
-  <Droplet />
+  <IconImg :url="iconGaz" :width="20" :height="20" />
 </template>
 
 <script setup>
-import { Droplet } from 'lucide-vue-next'
+import iconGaz from '@/assets/images/icones/icon-gaz.png'
+import IconImg from './IconImg.vue'
 </script>

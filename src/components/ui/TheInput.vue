@@ -3,7 +3,7 @@
     <div class="relative">
       <span
         v-if="addIconLeft && $slots.iconLeft"
-        class="absolute left-3 top-1/2 transform -translate-y-1/2"
+        class="absolute left-[29px] top-1/2 transform -translate-y-1/2"
         :class="{ 'hover:cursor-pointer': addIconLeftHover }"
       >
         <slot name="iconLeft" />
@@ -11,7 +11,7 @@
 
       <span
         v-if="addIconRight && $slots.iconRight"
-        class="absolute right-3 top-1/2 transform -translate-y-1/2"
+        class="absolute right-[29px] top-1/2 transform -translate-y-1/2"
         :class="{ 'hover:cursor-pointer': addIconRightHover }"
       >
         <slot name="iconRight" />
@@ -22,8 +22,8 @@
         v-model="localValue"
         :class="[
           'block w-full py-3 text-sm placeholder-primary-blue placeholder:text-md placeholder:font-light',
-          addIconLeft ? 'pl-9' : 'pl-3',
-          addIconRight ? 'pr-9' : 'pr-3',
+          addIconLeft ? 'pl-[55px]' : 'pl-[29px]',
+          addIconRight ? 'pr-[55px]' : 'pr-[29px]',
           inputClass,
         ]"
         :placeholder="inputPlaceholder"

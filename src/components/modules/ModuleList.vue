@@ -26,7 +26,7 @@
 <script setup>
 import ModuleItem from './ModuleItem.vue'
 import IconElec from '@/components/icons/IconElec.vue'
-import IconGaz from '@/components/icons/IconElec.vue'
+import IconGaz from '@/components/icons/IconGaz.vue'
 
 defineProps({
   title: String,

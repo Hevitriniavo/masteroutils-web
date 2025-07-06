@@ -41,6 +41,8 @@
     <main>
       <router-view />
     </main>
+
+    <HelpCenter />
   </div>
 </template>
 
@@ -52,6 +54,7 @@ import { useUserAuthStore } from '@/stores/store-user-auth'
 import { useRouter, useRoute } from 'vue-router'
 import { storage } from '@/stores/storage'
 import { useModule } from '@/composables/use-module'
+import HelpCenter from '../HelpCenter.vue'
 
 const authStore = useUserAuthStore()
 const router = useRouter()

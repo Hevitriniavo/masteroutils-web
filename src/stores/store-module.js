@@ -7,7 +7,7 @@ import modules from '@/utils/modules'
 export const useModuleStore = defineStore('module', () => {
   const gazs = ref([])
   const elecs = ref([])
-  const showWelcome = ref(true)
+  const showWelcome = ref(false)
   const monEspace = ref(null)
 
   const _mapModulesByOnglet = (modulesList, onglet, apiModules) => {

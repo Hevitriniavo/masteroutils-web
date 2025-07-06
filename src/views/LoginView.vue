@@ -53,12 +53,9 @@
           </TheInput>
 
           <p class="text-sm text-right text-gray-500 mt-2">
-            <RouterLink
-              :to="{ name: 'reset-password' }"
-              class="text-primary-blue font-bold underline"
-            >
+            <RouterLink :to="{ name: 'reset-password' }" class="text-primary-blue">
               <IconLock mini class="inline" />
-              Mot de passe oublié ?
+              <span class="ml-2 underline">Mot de passe oublié ?</span>
             </RouterLink>
           </p>
 
@@ -92,8 +89,10 @@ import * as yup from 'yup'
 import { useUserAuthStore } from '@/stores/store-user-auth'
 import { useModule } from '@/composables/use-module'
 import { useRouter } from 'vue-router'
+import { useModuleStore } from '@/stores/store-module'
 
 const storeAuth = useUserAuthStore()
+const storeModule = useModuleStore()
 const { openUserReporting } = useModule()
 const router = useRouter()
 
@@ -127,6 +126,8 @@ const handleSubmit = handleFormSubmit(async (values) => {
     })
 
     requestInProgress.value = false
+
+    storeModule.$patch({ showWelcome: true })
 
     if (storeAuth.permission === 'ROLE_MODULE') {
       router.push({ name: 'modules_elec' })

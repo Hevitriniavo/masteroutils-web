@@ -1,7 +1,8 @@
 <template>
-  <Lightbulb />
+  <IconImg :url="iconElec" :width="20" :height="20" />
 </template>
 
 <script setup>
-import { Lightbulb } from 'lucide-vue-next'
+import iconElec from '@/assets/images/icones/icon-elec.png'
+import IconImg from './IconImg.vue'
 </script>
